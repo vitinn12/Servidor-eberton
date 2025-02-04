@@ -3,9 +3,9 @@ module.exports = {
 
   client: 'pg',
   connection: {
-    database: 'sistautbd',
+    database: 'usuarios',
     user:     'postgres',
-    password: '123456'
+    password: '123davys'
   },
   pool: {
     min: 2,

@@ -10,7 +10,6 @@ module.exports = app => {
     const save = (req, res) => {
         obterHash(req.body.password, hash => {
             const password = hash
-
             /*if(!req.body.nome.trim()){
                 return res.status(400).send('Nome inválido!')
             }
@@ -20,7 +19,8 @@ module.exports = app => {
             }*/
            
             app.db('usuarios')
-                .insert({nome: req.body.nome,
+                .insert({
+                    nome: req.body.nome,
                     cpf: req.body.cpf,
                     telefone: req.body.telefone,
                     email: req.body.email,

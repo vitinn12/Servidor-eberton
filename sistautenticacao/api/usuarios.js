@@ -8,28 +8,30 @@ module.exports = app => {
     }
 
     const save = (req, res) => {
+        console.log("Headers:", req.headers); 
+        console.log("Body recebido:", req.body); 
+    
+        if (!req.body || !req.body.password) {
+            return res.status(400).json({ error: "Dados inválidos ou não recebidos" });
+        }
+    
         obterHash(req.body.password, hash => {
-            const password = hash
-            /*if(!req.body.nome.trim()){
-                return res.status(400).send('Nome inválido!')
-            }
-           
-            if(!req.body.cpf.trim()){
-                return res.status(400).send('Nome inválido!')
-            }*/
-           
+            const password = hash;
             app.db('usuarios')
                 .insert({
                     nome: req.body.nome,
                     cpf: req.body.cpf,
                     telefone: req.body.telefone,
                     email: req.body.email,
-                    password: password})
-                .then( _ => res.status(204).send())
-                .catch( err => res.status(400).json(err))
-               
-        })
-    }
+                    password: password
+                })
+                .then(() => res.status(201).json({ message: "Usuário cadastrado com sucesso!" }))
+                .catch(err => res.status(400).json({ error: "Erro ao cadastrar usuário", details: err }));
+        });
+    };
+    
+    
+    
     const listUsuarios = (req, res) => {
         app.db('usuarios')
             .orderBy('nome')

@@ -5,8 +5,7 @@ const consign = require('consign')
 
 consign()
    .include('./config/passport.js')
-   //.include('./config/passport.js')
-   .then('./config/middlewares.js')
+      .then('./config/middlewares.js')
    .then('./api')
    .then('./config/routes.js')
    .into(app)
@@ -14,7 +13,7 @@ consign()
 
 app.db = db
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     console.log('Servidor executando ...')
   })
 
